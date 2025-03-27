@@ -53,7 +53,7 @@ namespace ReOffloadFiles
 		private void RunSafe(IEngine engine)
 		{
 			string sourceFolder = @"C:\Skyline DataMiner\System Cache\offload\Data\failure";
-			string destinationFolder = @"C:\Skyline DataMiner\System Cache\offload\Data";
+			string destinationFolder = @"C:\Skyline DataMiner\System Cache\offload";
 
 			if (Directory.Exists(sourceFolder))
 			{
