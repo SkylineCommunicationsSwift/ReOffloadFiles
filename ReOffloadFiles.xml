@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DMSScript options="272" xmlns="http://www.skyline.be/automation">
 	<Name>ReOffloadFiles</Name>
-	<Description></Description>
+	<Description>This script moves failed offloaded file to be push again to the central database</Description>
 	<Type>Automation</Type>
 	<Author>Hugo Lopes</Author>
 	<CheckSets>FALSE</CheckSets>

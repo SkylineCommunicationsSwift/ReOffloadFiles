@@ -1,9 +1,6 @@
 namespace ReOffloadFiles
 {
 	using System;
-	using System.Collections.Generic;
-	using System.Globalization;
-	using System.Text;
 	using Skyline.DataMiner.Automation;
 	using System.IO;
 	using System.Linq;
@@ -13,6 +10,9 @@ namespace ReOffloadFiles
 	/// </summary>
 	public class Script
 	{
+		private const string sourceFolder = @"C:\Skyline DataMiner\System Cache\offload\Data\failure";
+		private const string destinationFolder = @"C:\Skyline DataMiner\System Cache\offload";
+
 		/// <summary>
 		/// The script entry point.
 		/// </summary>
@@ -52,34 +52,27 @@ namespace ReOffloadFiles
 
 		private void RunSafe(IEngine engine)
 		{
-			string sourceFolder = @"C:\Skyline DataMiner\System Cache\offload\Data\failure";
-			string destinationFolder = @"C:\Skyline DataMiner\System Cache\offload";
-
-			if (Directory.Exists(sourceFolder))
-			{
-				var files = Directory.GetFiles(sourceFolder).Take(20).ToList();
-
-				if (files.Any())
-				{
-					foreach (var file in files)
-					{
-						string fileName = Path.GetFileName(file);
-						string destFile = Path.Combine(destinationFolder, fileName);
-
-						File.Move(file, destFile);
-					}
-
-					engine.ExitSuccess("Files moved successfully.");
-				}
-				else
-				{
-					engine.ExitSuccess("No files to move.");
-				}
-			}
-			else
+			if (!Directory.Exists(sourceFolder))
 			{
 				engine.ExitFail("Source folder does not exist.");
 			}
+
+			var files = Directory.GetFiles(sourceFolder).Take(20).ToList();
+
+			if (files.Any())
+			{
+				engine.ExitSuccess("No files to move.");
+			}
+
+			foreach (var file in files)
+			{
+				string fileName = Path.GetFileName(file);
+				string destFile = Path.Combine(destinationFolder, fileName);
+
+				File.Move(file, destFile);
+			}
+
+			engine.ExitSuccess("Files moved successfully.");
 		}
 	}
 }
