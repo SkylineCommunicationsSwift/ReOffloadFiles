@@ -59,7 +59,7 @@ namespace ReOffloadFiles
 
 			var files = Directory.GetFiles(sourceFolder).Take(20).ToList();
 
-			if (files.Any())
+			if (!files.Any())
 			{
 				engine.ExitSuccess("No files to move.");
 			}
